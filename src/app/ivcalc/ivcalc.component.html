@@ -1,8 +1,91 @@
-<p>
-ivcalc works!
-</p>
+<div class="container-fluid">
 
-<ngb-alert type="success" [dismissible]="false">
-  Bootstrap is working!
-</ngb-alert>
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="https://serebii.net/sunmoon/pokemon/151.png" alt="">
+      <form class="form-horizontal" >
 
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pokemon">Pokemon</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="pokemon" placeholder="Mew">
+              <option>Scorbunny</option>
+              <option selected>Mew</option>
+              <option>Pikachu</option>
+            </select>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-sm-4">
+
+      <form class="form-horizontal" >
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="level">Level</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="level" placeholder="50">
+              <option>1</option>
+              <option selected>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="nature">Nature</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="nature" placeholder="Adamant">
+              <option selected>Adamant</option>
+              <option>Jolly</option>
+              <option>Timid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="charecteristic">Charecteristic</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="nature" placeholder="Likes to eat">
+              <option selected>Likes to eat</option>
+              <option>Jolly</option>
+              <option>Timid</option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="col-sm-4">
+      <table class="table table-condensed">
+        <thead>
+          <tr><th>Evs:</th>
+            <th>hp</th>
+            <th>atk</th>
+            <th>def</th>
+            <th>spa</th>
+            <th>spd</th>
+            <th>spe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td><input data-attr="ev_hp" type="text" class="form-control resubmit"   value="0"></td>
+            <td><input data-attr="ev_atk" type="text" class="form-control resubmit"  value="0"></td>
+            <td><input data-attr="ev_def" type="text" class="form-control resubmit"  value="0"></td>
+            <td><input data-attr="ev_spa" type="text" class="form-control resubmit"  value="0"></td>
+            <td><input data-attr="ev_spd" type="text" class="form-control resubmit"  value="0"></td>
+            <td><input data-attr="ev_spe" type="text" class="form-control resubmit"  value="0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+
+  </div>
+</div>
