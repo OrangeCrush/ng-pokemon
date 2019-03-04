@@ -1,91 +1,433 @@
 <div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-4">
+			<img src="https://serebii.net/sunmoon/pokemon/151.png" alt="">
+			<form class="form-horizontal" >
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="pokemon">Pokemon</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="pokemon" placeholder="Mew">
+              <ng-container *ngFor="let dexEntry of this.pokemonService.getAllBaseSpecies()">
+                <option value="dexEntry.key">{{ dexEntry.species }}</option>
+              </ng-container>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-sm-4">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="level">Level</label>
+					<div class="col-sm-10">
+						<select class="form-control" >
+              <ng-container *ngFor="let lvl of this.levels">
+                <option value="{{ lvl + 1  }}">{{ lvl + 1 }}</option>
+              </ng-container>
+						</select>
+					</div>
+				</div>
 
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="https://serebii.net/sunmoon/pokemon/151.png" alt="">
-      <form class="form-horizontal" >
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="nature">Nature</label>
+					<div class="col-sm-10">
+						<select class="form-control">
+              <ng-container *ngFor="let nature of this.pokemonService.getAllNatures()">
+                <option value="{{ nature.name }}">{{ nature.name }}</option>
+              </ng-container>
+						</select>
+					</div>
+				</div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="pokemon">Pokemon</label>
-          <div class="col-sm-10">
-            <select class="form-control" id="pokemon" placeholder="Mew">
-              <option>Scorbunny</option>
-              <option selected>Mew</option>
-              <option>Pikachu</option>
-            </select>
-          </div>
-        </div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="charecteristic">Charecteristic</label>
+					<div class="col-sm-10">
+						<select class="form-control">
+              <ng-container *ngFor="let characteristic of this.pokemonService.getAllCharacteristics()">
+                <option value="{{ characteristic.name }}">{{ characteristic.name }}</option>
+              </ng-container>
+						</select>
+					</div>
+				</div>
+			</form>
 
-      </form>
-    </div>
-    <div class="col-sm-4">
+		</div>
 
-      <form class="form-horizontal" >
+		<div class="col-sm-4">
+			<table class="table table-condensed">
+				<tbody>
+					<tr>
+            <td>hp</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+					<tr>
+            <td>atk</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+					<tr>
+            <td>def</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+					<tr>
+            <td>spa</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+					<tr>
+            <td>spdef</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+					<tr>
+            <td>spe</td>
+            <td><mv-slider [(value)]="value" [min]="1" [max]="252" [enabled]="enabled" (change)="change()"></mv-slider></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="level">Level</label>
-          <div class="col-sm-10">
-            <select class="form-control" id="level" placeholder="50">
-              <option>1</option>
-              <option selected>50</option>
-              <option>100</option>
-            </select>
-          </div>
-        </div>
+	<div class="row">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>IV Range</th>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="nature">Nature</label>
-          <div class="col-sm-10">
-            <select class="form-control" id="nature" placeholder="Adamant">
-              <option selected>Adamant</option>
-              <option>Jolly</option>
-              <option>Timid</option>
-            </select>
-          </div>
-        </div>
+					<th>hp</th>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="charecteristic">Charecteristic</label>
-          <div class="col-sm-10">
-            <select class="form-control" id="nature" placeholder="Likes to eat">
-              <option selected>Likes to eat</option>
-              <option>Jolly</option>
-              <option>Timid</option>
-            </select>
-          </div>
-        </div>
-      </form>
+					<th>atk</th>
 
-    </div>
+					<th>def</th>
 
-    <div class="col-sm-4">
-      <table class="table table-condensed">
-        <thead>
-          <tr><th>Evs:</th>
-            <th>hp</th>
-            <th>atk</th>
-            <th>def</th>
-            <th>spa</th>
-            <th>spd</th>
-            <th>spe</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td><input data-attr="ev_hp" type="text" class="form-control resubmit"   value="0"></td>
-            <td><input data-attr="ev_atk" type="text" class="form-control resubmit"  value="0"></td>
-            <td><input data-attr="ev_def" type="text" class="form-control resubmit"  value="0"></td>
-            <td><input data-attr="ev_spa" type="text" class="form-control resubmit"  value="0"></td>
-            <td><input data-attr="ev_spd" type="text" class="form-control resubmit"  value="0"></td>
-            <td><input data-attr="ev_spe" type="text" class="form-control resubmit"  value="0"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+					<th>spa</th>
 
-  <div class="row">
+					<th>spd</th>
 
-  </div>
+					<th>spe</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+					<td>31</td>
+					<td class="">145</td>
+					<td class="">115</td>
+					<td class="">90</td>
+					<td class="">72</td>
+					<td class="">90</td>
+					<td class="">70</td>
+				</tr>
+
+				<tr>
+					<td>30</td>
+					<td class="">145</td>
+					<td class="">115</td>
+					<td class="">90</td>
+					<td class="">72</td>
+					<td class="">90</td>
+					<td class="">70</td>
+				</tr>
+
+				<tr>
+					<td>29</td>
+					<td class="">144</td>
+					<td class="">114</td>
+					<td class="">89</td>
+					<td class="">71</td>
+					<td class="">89</td>
+					<td class="">69</td>
+				</tr>
+
+				<tr>
+					<td>28</td>
+					<td class="">144</td>
+					<td class="">114</td>
+					<td class="">89</td>
+					<td class="">71</td>
+					<td class="">89</td>
+					<td class="">69</td>
+				</tr>
+
+				<tr>
+					<td>27</td>
+					<td class="">143</td>
+					<td class="">113</td>
+					<td class="">88</td>
+					<td class="">70</td>
+					<td class="">88</td>
+					<td class="">68</td>
+				</tr>
+
+				<tr>
+					<td>26</td>
+					<td class="">143</td>
+					<td class="">113</td>
+					<td class="">88</td>
+					<td class="">70</td>
+					<td class="">88</td>
+					<td class="">68</td>
+				</tr>
+
+				<tr>
+					<td>25</td>
+					<td class="">142</td>
+					<td class="">112</td>
+					<td class="">87</td>
+					<td class="">69</td>
+					<td class="">87</td>
+					<td class="">67</td>
+				</tr>
+
+				<tr>
+					<td>24</td>
+					<td class="">142</td>
+					<td class="">112</td>
+					<td class="">87</td>
+					<td class="">69</td>
+					<td class="">87</td>
+					<td class="">67</td>
+				</tr>
+
+				<tr>
+					<td>23</td>
+					<td class="">141</td>
+					<td class="">111</td>
+					<td class="">86</td>
+					<td class="">68</td>
+					<td class="">86</td>
+					<td class="">66</td>
+				</tr>
+
+				<tr>
+					<td>22</td>
+					<td class="">141</td>
+					<td class="">111</td>
+					<td class="">86</td>
+					<td class="">68</td>
+					<td class="">86</td>
+					<td class="">66</td>
+				</tr>
+
+				<tr>
+					<td>21</td>
+					<td class="">140</td>
+					<td class="">110</td>
+					<td class="">85</td>
+					<td class="">67</td>
+					<td class="">85</td>
+					<td class="">65</td>
+				</tr>
+
+				<tr>
+					<td>20</td>
+					<td class="">140</td>
+					<td class="">110</td>
+					<td class="">85</td>
+					<td class="">67</td>
+					<td class="">85</td>
+					<td class="">65</td>
+				</tr>
+
+				<tr>
+					<td>19</td>
+					<td class="">139</td>
+					<td class="">108</td>
+					<td class="">84</td>
+					<td class="">66</td>
+					<td class="">84</td>
+					<td class="">64</td>
+				</tr>
+
+				<tr>
+					<td>18</td>
+					<td class="">139</td>
+					<td class="">108</td>
+					<td class="">84</td>
+					<td class="">66</td>
+					<td class="">84</td>
+					<td class="">64</td>
+				</tr>
+
+				<tr>
+					<td>17</td>
+					<td class="">138</td>
+					<td class="">107</td>
+					<td class="">83</td>
+					<td class="">65</td>
+					<td class="">83</td>
+					<td class="">63</td>
+				</tr>
+
+				<tr>
+					<td>16</td>
+					<td class="">138</td>
+					<td class="">107</td>
+					<td class="">83</td>
+					<td class="">65</td>
+					<td class="">83</td>
+					<td class="">63</td>
+				</tr>
+
+				<tr>
+					<td>15</td>
+					<td class="">137</td>
+					<td class="">106</td>
+					<td class="">82</td>
+					<td class="">64</td>
+					<td class="">82</td>
+					<td class="">62</td>
+				</tr>
+
+				<tr>
+					<td>14</td>
+					<td class="">137</td>
+					<td class="">106</td>
+					<td class="">82</td>
+					<td class="">64</td>
+					<td class="">82</td>
+					<td class="">62</td>
+				</tr>
+
+				<tr>
+					<td>13</td>
+					<td class="">136</td>
+					<td class="">105</td>
+					<td class="">81</td>
+					<td class="">63</td>
+					<td class="">81</td>
+					<td class="">61</td>
+				</tr>
+
+				<tr>
+					<td>12</td>
+					<td class="">136</td>
+					<td class="">105</td>
+					<td class="">81</td>
+					<td class="">63</td>
+					<td class="">81</td>
+					<td class="">61</td>
+				</tr>
+
+				<tr>
+					<td>11</td>
+					<td class="">135</td>
+					<td class="">104</td>
+					<td class="">80</td>
+					<td class="">63</td>
+					<td class="">80</td>
+					<td class="">60</td>
+				</tr>
+
+				<tr>
+					<td>10</td>
+					<td class="">135</td>
+					<td class="">104</td>
+					<td class="">80</td>
+					<td class="">63</td>
+					<td class="">80</td>
+					<td class="">60</td>
+				</tr>
+
+				<tr>
+					<td>9</td>
+					<td class="">134</td>
+					<td class="">103</td>
+					<td class="">79</td>
+					<td class="">62</td>
+					<td class="">79</td>
+					<td class="">59</td>
+				</tr>
+
+				<tr>
+					<td>8</td>
+					<td class="">134</td>
+					<td class="">103</td>
+					<td class="">79</td>
+					<td class="">62</td>
+					<td class="">79</td>
+					<td class="">59</td>
+				</tr>
+
+				<tr>
+					<td>7</td>
+					<td class="">133</td>
+					<td class="">102</td>
+					<td class="">78</td>
+					<td class="">61</td>
+					<td class="">78</td>
+					<td class="">58</td>
+				</tr>
+
+				<tr>
+					<td>6</td>
+					<td class="">133</td>
+					<td class="">102</td>
+					<td class="">78</td>
+					<td class="">61</td>
+					<td class="">78</td>
+					<td class="">58</td>
+				</tr>
+
+				<tr>
+					<td>5</td>
+					<td class="">132</td>
+					<td class="">101</td>
+					<td class="">77</td>
+					<td class="">60</td>
+					<td class="">77</td>
+					<td class="">57</td>
+				</tr>
+
+				<tr>
+					<td>4</td>
+					<td class="">132</td>
+					<td class="">101</td>
+					<td class="">77</td>
+					<td class="">60</td>
+					<td class="">77</td>
+					<td class="">57</td>
+				</tr>
+
+				<tr>
+					<td>3</td>
+					<td class="">131</td>
+					<td class="">100</td>
+					<td class="">76</td>
+					<td class="">59</td>
+					<td class="">76</td>
+					<td class="">56</td>
+				</tr>
+
+				<tr>
+					<td>2</td>
+					<td class="">131</td>
+					<td class="">100</td>
+					<td class="">76</td>
+					<td class="">59</td>
+					<td class="">76</td>
+					<td class="">56</td>
+				</tr>
+
+				<tr>
+					<td>1</td>
+					<td class="">130</td>
+					<td class="">99</td>
+					<td class="">75</td>
+					<td class="">58</td>
+					<td class="">75</td>
+					<td class="">55</td>
+				</tr>
+
+				<tr>
+					<td>0</td>
+					<td class="">130</td>
+					<td class="">99</td>
+					<td class="">75</td>
+					<td class="">58</td>
+					<td class="">75</td>
+					<td class="">55</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
 </div>

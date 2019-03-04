@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 // Could reduce page in size by importing only what I need
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvcalcComponent } from './ivcalc/ivcalc.component';
+import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { IvcalcComponent } from './ivcalc/ivcalc.component';
   ],
   imports: [
     BrowserModule,
+    NgxBootstrapSliderModule ,
     AppRoutingModule,
     NgbModule
   ],
